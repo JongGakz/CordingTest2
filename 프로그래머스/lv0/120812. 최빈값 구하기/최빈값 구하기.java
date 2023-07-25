@@ -1,21 +1,37 @@
+import java.util.*;
+
 class Solution {
    public int solution(int[] array) {
-        int answer = 0;
-        int maxCount = 0;
+        Map<Integer, Integer> maps = new HashMap<>();
+
         for (int i = 0; i < array.length; i++) {
-            int count = 0;
-            for (int j = 0; j < array.length; j++) {
-                if (array[i] == array[j]) {
-                    count++;
-                    if (maxCount < count) {
-                        maxCount = count;
-                        answer = array[i];
-                    }else if (maxCount == count && answer != array[i]) {
-                        answer = -1;
-                    }
+            if (maps.containsKey(array[i])) {
+                maps.put(array[i], maps.get(array[i]) + 1);
+            } else {
+                maps.put(array[i], 1);
+            }
+        }
+
+//        for (int i = 0; i <= 1000; i++) {
+//            if (maps.get(i) != null) {
+//                System.out.println(i + "=" + maps.get(i));
+//            }
+//        }
+
+        int temp = 0;
+        int temp2 = 0;
+        int answer = 0;
+
+        for (int i = 0; i <= 1000; i++) {
+            if (maps.get(i) != null) {
+                if (maps.get(i) >= temp) {
+                    answer = i;
+                    temp2 = temp;
+                    temp = maps.get(i);
                 }
             }
         }
+        if (temp2 == temp) return -1;
         return answer;
     }
 }
