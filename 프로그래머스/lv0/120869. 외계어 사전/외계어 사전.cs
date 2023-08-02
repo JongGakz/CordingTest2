@@ -3,27 +3,24 @@ using System;
 public class Solution {
      public int solution(string[] spell, string[] dic)
         {
-              int answer = 0;
-        for(int i =0 ; i < dic.Length;i++)
-        {
-            for(int k =0 ; k < spell.Length;k++)
-            {
-                if(dic[i].Contains(spell[k]))
+            int answer = 0;
+            for (int i = 0; i < dic.Length; i++)
+            {   
+                for (int j = 0; j < spell.Length; j++)
                 {
-                    dic[i] = dic[i].Replace(spell[k],String.Empty);
+                    if (!(dic[i].Contains(spell[j])))
+                    {
+                        break;
+                    }
 
-                    if(dic[i] == String.Empty && k == spell.Length-1)
+                    dic[i] = dic[i].Replace(spell[j], string.Empty);
+
+                    if (dic[i] == string.Empty && j == spell.Length - 1)
                     {
                         return 1;
                     }
                 }
-                else
-                {
-                   break;
-                }
             }
+            return 2;
         }
-        return 2;
-        }
-
 }
